@@ -1,3 +1,2 @@
 -> /api/v1/order/quote: so when you apply for market order for a coin/stock we the exchange picks up the stocks which are cheapest in order book & accumulated and then divided my money you are spending which gives the user average price of stock he is paying for 1 stock
 . that's why on coin exchange we don't put lumpsum at one exchange because it will cause add all the cheapest stocks on order book and then will continue to add expensive stocks too until your money get exhausted
-
