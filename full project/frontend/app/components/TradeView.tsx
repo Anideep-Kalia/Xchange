@@ -8,29 +8,25 @@ export function TradeView({
 }: {
   market: string;
 }) {
-  const chartRef = useRef<HTMLDivElement>(null);     // chartRef points to the DOM element where the chart will be rendered.
+  const chartRef = useRef<HTMLDivElement>(null);
   const chartManagerRef = useRef<ChartManager>(null);
 
   useEffect(() => {
     const init = async () => {
       let klineData: KLine[] = [];
       try {
-        // getting historical data inside klindData
         klineData = await getKlines(market, "1h", Math.floor((new Date().getTime() - 1000 * 60 * 60 * 24 * 7) / 1000), Math.floor(new Date().getTime() / 1000)); 
       } catch (e) { }
 
-      
       if (chartRef) {
-        // destroying chartManagerRef instance if any old data
         if (chartManagerRef.current) {
           chartManagerRef.current.destroy();
         }
-
-        const chartManager = new ChartManager( 
-          chartRef.current,                     // parameter chartRef will get chartRef.current value
+        console.log(klineData)
+        const chartManager = new ChartManager(
+          chartRef.current,
           [
-            // spread operatore is used to create array of klineData
-            ...klineData?.map((x) => ({          // filling chartmanager parameter in sorted manner with klineData (candle stick)
+            ...klineData?.map((x) => ({
               close: parseFloat(x.close),
               high: parseFloat(x.high),
               low: parseFloat(x.low),
@@ -44,7 +40,7 @@ export function TradeView({
           }
         );
         //@ts-ignore
-        chartManagerRef.current = chartManager;   // value assigned to ref
+        chartManagerRef.current = chartManager;
       }
     };
     init();
